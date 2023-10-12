@@ -19,8 +19,8 @@ services:
       dockerfile: Dockerfile
     volumes:
       - ../:/var/www/invited
-    depends_on:
-      - database
+  #    depends_on:
+  #      - database
   node:
     container_name: invited_node
     build:
@@ -31,17 +31,18 @@ services:
     tty: true
     ports:
       - "3331:3331"
-  database:
-    container_name: invited_database
-    image: postgres:15.1-alpine
-    volumes:
-      - database:/var/lib/postgresql/data
-    environment:
-      POSTGRES_USER: invited
-      POSTGRES_PASSWORD: secret
-      POSTGRES_DB: invited
-    ports:
-      - "5434:5432"
+#  database:
+#    container_name: invited_database
+#    image: postgres:15.1-alpine
+#    volumes:
+#      - database:/var/lib/postgresql/data
+#    environment:
+#      POSTGRES_USER: invited
+#      POSTGRES_PASSWORD: secret
+#      POSTGRES_DB: invited
+#    ports:
+#      - "5434:5432"
+
 #  redis:
 #    container_name: invited_redis
 #    image: redis:6.0-alpine
@@ -51,6 +52,6 @@ services:
 #      - "6378:6379"
 #    command: redis-server --requirepass secret
 
-volumes:
-  database:
+#volumes:
+#  database:
 #  redis:

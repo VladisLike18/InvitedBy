@@ -30,25 +30,7 @@ docker-build:
 	docker-compose -f docker_invited/docker-compose.yml build
 
 #Run app
-
-#invited-migrate
-#invited-fixture
-run-app: composer-install invited-phpcs
+run-app: composer-install
 
 composer-install:
 	docker exec -it invited_php-fpm composer install
-
-#invited-migrate:
-#docker exec -it invited_php-fpm php bin/console doctrine:migrations:migrate --no-interaction
-
-#invited-fixture:
-#docker exec -it invited_php-fpm php bin/console doctrine:fixtures:load --no-interaction
-
-invited-phpcs: invited-phpcs-mkdir invited-phpcs-composer
-invited-phpcs-mkdir:
-	docker exec -it invited_php-fpm mkdir -p --parents tools/php-cs-fixer
-invited-phpcs-composer:
-	docker exec -it invited_php-fpm composer require --no-interaction --working-dir=tools/php-cs-fixer friendsofphp/php-cs-fixer
-
-fixer:
-	docker exec -it invited_php-fpm tools/php-cs-fixer/vendor/bin/php-cs-fixer fix src
